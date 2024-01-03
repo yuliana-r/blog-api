@@ -3,14 +3,14 @@ let postRouter = express.Router();
 
 const postController = require("../controllers/postController");
 
-postRouter.get("/posts", postController.posts_list);
+postRouter.get("/", postController.getPosts);
 
-postRouter.get("/posts/:id", postController.post_detail);
+postRouter.get("/:id", postController.getPostDetail);
 
-postRouter.post("/posts", postController.post_create);
+postRouter.post("/", postController.createPost);
 
-postRouter.put("/posts/:id", postController.post_update);
+postRouter.put("/:id", postController.updatePost);
 
-postRouter.delete("/posts/:id", postController.post_delete);
+postRouter.delete("/:id", postController.deletePost);
 
 module.exports = postRouter;
