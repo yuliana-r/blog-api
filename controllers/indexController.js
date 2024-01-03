@@ -1,7 +1,21 @@
 const asyncHandler = require("express-async-handler");
+const Post = require("../models/post");
+const datefns = require("date-fns/format");
 
 exports.index = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Index - get all posts");
+  // const allPosts = await Post.find(
+  //   {},
+  //   "title author timestamp imageURL commentsCount"
+  // )
+  //   .sort({ timestamp: -1 })
+  //   .populate("author")
+  //   .exec();
+
+  res.json({
+    title: "Home",
+    all_posts: allPosts,
+    datefns: datefns,
+  });
 });
 
 exports.sign_up_form_get = asyncHandler(async (req, res, next) => {

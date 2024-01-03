@@ -8,26 +8,14 @@ exports.post_detail = asyncHandler(async (req, res, next) => {
   res.send("NOT IMPLEMENTED: Post detail");
 });
 
-exports.new_post_form_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Post create GET");
+exports.post_create = asyncHandler(async (req, res, next) => {
+  res.send("NOT IMPLEMENTED: Post create");
 });
 
-exports.new_post_form_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Post create POST");
+exports.post_update = asyncHandler(async (req, res, next) => {
+  res.send("NOT IMPLEMENTED: Post update");
 });
 
-exports.post_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Post delete GET");
-});
-
-exports.post_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Post delete POST");
-});
-
-exports.post_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Post update GET");
-});
-
-exports.post_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Post update POST");
+exports.post_delete = asyncHandler(async (req, res, next) => {
+  res.send("NOT IMPLEMENTED: Post delete");
 });

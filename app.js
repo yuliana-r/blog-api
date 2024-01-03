@@ -5,14 +5,13 @@ let cookieParser = require("cookie-parser");
 let logger = require("morgan");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const app = express();
 
 let indexRouter = require("./routes/index");
 let postsRouter = require("./routes/posts");
 let usersRouter = require("./routes/users");
 let categoriesRouter = require("./routes/category");
 let commentsRouter = require("./routes/comment");
-
-var app = express();
 
 // Mongoose - MongoDB set up
 
@@ -25,12 +24,12 @@ async function main() {
 }
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs");
+//app.set("views", path.join(__dirname, "views"));
+//app.set("view engine", "ejs");
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
