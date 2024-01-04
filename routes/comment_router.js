@@ -1,7 +1,7 @@
 let express = require('express');
 let commentRouter = express.Router();
 
-const commentController = require('../controllers/commentController');
+const commentController = require('../controllers/comment_controller');
 
 commentRouter.post('/', commentController.createComment);
 

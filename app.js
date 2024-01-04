@@ -3,15 +3,16 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const app = express();
 
-let authRouter = require('./routes/auth');
-let postsRouter = require('./routes/posts');
-let usersRouter = require('./routes/users');
-let categoriesRouter = require('./routes/category');
-let commentsRouter = require('./routes/comment');
+const authRouter = require('./routes/auth_router');
+const postRouter = require('./routes/post_router');
+const userRouter = require('./routes/user_router');
+const categoryRouter = require('./routes/category_router');
+const commentRouter = require('./routes/comment_router');
 
 // Mongoose - MongoDB set up
 
@@ -23,10 +24,6 @@ async function main() {
   await mongoose.connect(`${process.env.MONGODB_URI}`);
 }
 
-// view engine setup
-//app.set("views", path.join(__dirname, "views"));
-//app.set("view engine", "ejs");
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -34,10 +31,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/auth', authRouter);
-app.use('/users', usersRouter);
-app.use('/posts', postsRouter);
-app.use('/categories', categoriesRouter);
-app.use('/comments', commentsRouter);
+app.use('/users', userRouter);
+app.use('/posts', postRouter);
+app.use('/categories', categoryRouter);
+app.use('/comments', commentRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -52,7 +49,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json('error');
 });
 
 module.exports = app;

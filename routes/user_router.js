@@ -1,7 +1,7 @@
 let express = require('express');
 let userRouter = express.Router();
 
-const userController = require('../controllers/userController');
+const userController = require('../controllers/user_controller');
 
 userRouter.get('/:id', userController.getUserDetail);
 
