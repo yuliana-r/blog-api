@@ -1,5 +1,5 @@
-let express = require('express');
-let categoryRouter = express.Router();
+const express = require('express');
+const categoryRouter = express.Router();
 
 const categoryController = require('../controllers/category_controller');
 
@@ -9,7 +9,7 @@ categoryRouter.get('/:id', categoryController.getCategoryDetail);
 
 categoryRouter.post('/', categoryController.createCategory);
 
-categoryRouter.put('/:id', categoryController.updateCategory);
+categoryRouter.patch('/:id', categoryController.updateCategory);
 
 categoryRouter.delete('/:id', categoryController.deleteCategory);
 
