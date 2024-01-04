@@ -1,16 +1,16 @@
-let express = require("express");
+let express = require('express');
 let postRouter = express.Router();
 
-const postController = require("../controllers/postController");
+const postController = require('../controllers/postController');
 
-postRouter.get("/", postController.getPosts);
+postRouter.get('/', postController.getPosts);
 
-postRouter.get("/:id", postController.getPostDetail);
+postRouter.get('/:id', postController.getPostDetail);
 
-postRouter.post("/", postController.createPost);
+postRouter.post('/', postController.createPost);
 
-postRouter.put("/:id", postController.updatePost);
+postRouter.put('/:id', postController.updatePost);
 
-postRouter.delete("/:id", postController.deletePost);
+postRouter.delete('/:id', postController.deletePost);
 
 module.exports = postRouter;

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -14,11 +14,11 @@ const UserSchema = new Schema({
   },
   password: { type: String, minLength: 8, maxLength: 100, required: true },
   isAdmin: { type: Boolean, default: false, required: true },
-  posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+  posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
 });
 
-UserSchema.virtual("url").get(function () {
+UserSchema.virtual('url').get(function () {
   return `/users/${this.username}`;
 });
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model('User', UserSchema);

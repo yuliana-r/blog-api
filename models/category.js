@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -11,8 +11,8 @@ const CategorySchema = new Schema({
   },
 });
 
-CategorySchema.virtual("url").get(function () {
+CategorySchema.virtual('url').get(function () {
   return `/category/${this.name}`;
 });
 
-module.exports = mongoose.model("Category", CategorySchema);
+module.exports = mongoose.model('Category', CategorySchema);
