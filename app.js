@@ -30,6 +30,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// CORS error handler
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-Width, Content-Type, Accept, Authorization'
+  );
+
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+    return res.status(200).json({});
+  }
+
+  next();
+});
+
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
 app.use('/posts', postRouter);
@@ -42,14 +58,14 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-// app.use(function (err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-//   // render the error page
-//   res.status(err.status || 500);
-//   //res.send('Something is not quite right.');
-// });
+app.use(function (err, req, res, next) {
+  // render the error page
+  res.status(err.status || 500);
+  res.json({
+    error: {
+      message: err.message,
+    },
+  });
+});
 
 module.exports = app;

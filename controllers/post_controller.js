@@ -11,7 +11,7 @@ exports.getPosts = asyncHandler(async (req, res, next) => {
 });
 
 exports.getPostDetail = asyncHandler(async (req, res, next) => {
-  const post = await Post.findById(req.params.id);
+  const post = await Post.findById(req.params.postID);
   if (post == null) {
     return res.status(404).json({ message: 'Post does not exist.' });
   }
@@ -34,20 +34,20 @@ exports.createPost = asyncHandler(async (req, res, next) => {
 
 exports.updatePost = asyncHandler(async (req, res, next) => {
   try {
-    let updatedPost = await Post.findById(req.params.id);
-    if (updatedPost == null) {
+    let post = await Post.findById(req.params.postID);
+    if (post == null) {
       return res.status(404).json({ message: 'Post does not exist.' });
     }
 
     if (req.body.title) {
-      updatedPost.title = req.body.title;
+      post.title = req.body.title;
     }
     if (req.body.text) {
-      updatedPost.text = req.body.text;
+      post.text = req.body.text;
     }
 
-    await updatedPost.save();
-    res.json({ message: 'Post updated successfully.', updatedPost });
+    await post.save();
+    res.json({ message: 'Post updated successfully.', post });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -55,7 +55,7 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
 
 exports.deletePost = asyncHandler(async (req, res, next) => {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.postID);
     if (post == null) {
       return res.status(404).json({ message: 'Post does not exist.' });
     }
