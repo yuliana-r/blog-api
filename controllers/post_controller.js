@@ -11,7 +11,11 @@ exports.getPosts = asyncHandler(async (req, res, next) => {
 });
 
 exports.getPostDetail = asyncHandler(async (req, res, next) => {
-  res.json(res.post);
+  const post = await Post.findById(req.params.id);
+  if (post == null) {
+    return res.status(404).json({ message: 'Post does not exist.' });
+  }
+  res.json(post);
 });
 
 exports.createPost = asyncHandler(async (req, res, next) => {
@@ -29,29 +33,34 @@ exports.createPost = asyncHandler(async (req, res, next) => {
 });
 
 exports.updatePost = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Post update');
+  try {
+    let updatedPost = await Post.findById(req.params.id);
+    if (updatedPost == null) {
+      return res.status(404).json({ message: 'Post does not exist.' });
+    }
+
+    if (req.body.title) {
+      updatedPost.title = req.body.title;
+    }
+    if (req.body.text) {
+      updatedPost.text = req.body.text;
+    }
+
+    await updatedPost.save();
+    res.json({ message: 'Post updated successfully.', updatedPost });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 });
 
 exports.deletePost = asyncHandler(async (req, res, next) => {
   try {
-    await res.post.deleteOne();
-    res.json({ message: 'Post deleted successfully.' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-exports.getPost = asyncHandler(async (req, res, next) => {
-  let post;
-  try {
-    post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id);
     if (post == null) {
       return res.status(404).json({ message: 'Post does not exist.' });
     }
-    res.post = post;
-    res.json(post);
-
-    //next();
+    await post.deleteOne();
+    res.json({ message: 'Post deleted successfully.' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

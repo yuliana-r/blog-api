@@ -5,12 +5,12 @@ const postController = require('../controllers/post_controller');
 
 postRouter.get('/', postController.getPosts);
 
-postRouter.get('/:id', postController.getPost, postController.getPostDetail);
+postRouter.get('/:id', postController.getPostDetail);
 
 postRouter.post('/', postController.createPost);
 
-postRouter.patch('/:id', postController.getPost, postController.updatePost);
+postRouter.patch('/:id', postController.updatePost);
 
-postRouter.delete('/:id', postController.getPost, postController.deletePost);
+postRouter.delete('/:id', postController.deletePost);
 
 module.exports = postRouter;
