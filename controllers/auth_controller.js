@@ -1,34 +1,27 @@
 const asyncHandler = require('express-async-handler');
+const User = require('../models/User');
+const bcrypt = require('bcrypt');
 
-exports.index = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Index');
-  // const allPosts = await Post.find(
-  //   {},
-  //   "title author timestamp imageURL commentsCount"
-  // )
-  //   .sort({ timestamp: -1 })
-  //   .populate("author")
-  //   .exec();
+exports.signUp = asyncHandler(async (req, res, next) => {
+  bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+    if (err) {
+      return next(err);
+    }
+    const user = new User({
+      firstName: req.body.firstName,
+      username: req.body.username,
+      password: hashedPassword,
+    });
 
-  // res.json({
-  //   title: "Home",
-  //   all_posts: allPosts,
-  //   datefns: datefns,
-  // });
+    try {
+      await user.save();
+      res.status(201).json(user);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  });
 });
 
-exports.sign_up_form_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Sign up form GET');
-});
-
-exports.sign_up_form_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Sign up form POST');
-});
-
-exports.log_in_form_get = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Log in form GET');
-});
-
-exports.log_in_form_post = asyncHandler(async (req, res, next) => {
-  res.send('NOT IMPLEMENTED: Log in form POST');
+exports.logIn = asyncHandler(async (req, res, next) => {
+  res.send('NOT IMPLEMENTED: Log in');
 });
