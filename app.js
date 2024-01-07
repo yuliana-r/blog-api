@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const bcrypt = require('bcrypt');
 
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -13,6 +14,8 @@ const postRouter = require('./routes/post_router');
 const userRouter = require('./routes/user_router');
 const categoryRouter = require('./routes/category_router');
 const commentRouter = require('./routes/comment_router');
+
+const User = require('./models/User');
 
 // Mongoose - MongoDB set up
 
@@ -46,7 +49,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/auth', authRouter);
+app.use('/', authRouter);
 app.use('/users', userRouter);
 app.use('/posts', postRouter);
 app.use('/categories', categoryRouter);
