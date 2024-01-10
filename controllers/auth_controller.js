@@ -17,8 +17,10 @@ exports.signUp = asyncHandler(async (req, res, next) => {
     }
     const user = new User({
       firstName: req.body.firstName,
+      lastName: req.body.lastName,
       username: req.body.username,
       password: hashedPassword,
+      isAdmin: req.body.isAdmin,
     });
 
     try {

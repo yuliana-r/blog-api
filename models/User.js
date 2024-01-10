@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema({
   firstName: { type: String, minLength: 2, maxLength: 30, required: true },
-  // lastName: { type: String, minLength: 2, maxLength: 30, required: true },
+  lastName: { type: String, minLength: 2, maxLength: 30, required: true },
   username: {
     type: String,
     minLength: 8,
@@ -13,8 +13,8 @@ const UserSchema = new Schema({
     unique: true,
   },
   password: { type: String, minLength: 8, maxLength: 100, required: true },
-  // isAdmin: { type: Boolean, default: false, required: true },
-  // posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+  isAdmin: { type: Boolean, default: false, required: true },
+  //posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
 });
 
 UserSchema.virtual('url').get(function () {

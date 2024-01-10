@@ -52,14 +52,17 @@ app.use('/posts', postRouter);
 app.use('/categories', categoryRouter);
 app.use('/comments', commentRouter);
 
-function ignoreFavicon(req, res, next) {
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
+app.use((req, res, next) => {
   if (req.originalUrl.includes('favicon.ico')) {
     res.status(204).end();
   }
   next();
-}
-
-app.use(ignoreFavicon);
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
