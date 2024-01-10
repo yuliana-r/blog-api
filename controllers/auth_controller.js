@@ -30,6 +30,8 @@ exports.signUp = asyncHandler(async (req, res, next) => {
   });
 });
 
+// LOG IN user
+
 exports.logIn = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ username: req.body.username });
   try {

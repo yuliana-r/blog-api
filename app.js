@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const bcrypt = require('bcrypt');
 
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -14,8 +13,6 @@ const postRouter = require('./routes/post_router');
 const userRouter = require('./routes/user_router');
 const categoryRouter = require('./routes/category_router');
 const commentRouter = require('./routes/comment_router');
-
-const User = require('./models/User');
 
 // Mongoose - MongoDB set up
 
@@ -54,6 +51,15 @@ app.use('/users', userRouter);
 app.use('/posts', postRouter);
 app.use('/categories', categoryRouter);
 app.use('/comments', commentRouter);
+
+function ignoreFavicon(req, res, next) {
+  if (req.originalUrl.includes('favicon.ico')) {
+    res.status(204).end();
+  }
+  next();
+}
+
+app.use(ignoreFavicon);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -5,12 +5,12 @@ const categoryController = require('../controllers/category_controller');
 
 categoryRouter.get('/', categoryController.getCategories);
 
-categoryRouter.get('/:id', categoryController.getCategoryDetail);
+categoryRouter.get('/:categoryID', categoryController.getCategoryDetail);
 
 categoryRouter.post('/', categoryController.createCategory);
 
-categoryRouter.patch('/:id', categoryController.updateCategory);
+categoryRouter.patch('/:categoryID', categoryController.updateCategory);
 
-categoryRouter.delete('/:id', categoryController.deleteCategory);
+categoryRouter.delete('/:categoryID', categoryController.deleteCategory);
 
 module.exports = categoryRouter;
